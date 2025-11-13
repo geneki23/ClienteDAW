@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saludo Interactivo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        input {
+            padding: 10px;
+            width: 250px;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        #mensajes {
+            margin-top: 20px;
+        }
+        
+        .mensaje {
+            background-color: #e7f3fe;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #2196F3;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Saludo Interactivo</h2>
+    
+    <input id="nombre" placeholder="Ingresa tu nombre">
+    <button id="saludar">Saludar</button>
+    
+    <div id="mensajes"></div>
+
+    <script>
+        // Obtengo los elementos del DOM
+        const inputNombre = document.getElementById("nombre");
+        const botonSaludar = document.getElementById("saludar");
+        const divMensajes = document.getElementById("mensajes");
+        
+        // Función que se ejecuta al hacer clic
+        function saludarUsuario() {
+            
+            const nombre = inputNombre.value.trim();
+            
+            // Si no escribió nada, le aviso
+            if (nombre === "") {
+                alert("Por favor, ingresa tu nombre");
+                return;
+            }
+            
+            // Creo el mensaje de bienvenida
+            const mensajeTexto = "¡Hola " + nombre + "! Bienvenido/a.";
+            
+            // Muestro la alerta
+            alert(mensajeTexto);
+            
+            // Creo un div nuevo para mostrar el mensaje
+            const nuevoMensaje = document.createElement("div");
+            nuevoMensaje.className = "mensaje";
+            nuevoMensaje.textContent = mensajeTexto;
+            
+            // Lo añado al div de mensajes
+            divMensajes.appendChild(nuevoMensaje);
+            
+            //Ventana nueva con el mensaje
+            const ventanaHija = window.open("", "", "width=400,height=200");
+            if (ventanaHija) {
+                ventanaHija.document.write(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>Bienvenida</title>
+                        <style>
+                            body {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                height: 100vh;
+                                margin: 0;
+                                font-family: Arial, sans-serif;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h2>${mensajeTexto}</h2>
+                    </body>
+                    </html>
+                `);
+                ventanaHija.document.close();
+            }
+            
+            // Programa que el mensaje desaparezca después de 5 segundos
+            setTimeout(function() {
+                nuevoMensaje.remove();
+            }, 5000);
+            
+            // Limpia el input
+            inputNombre.value = "";
+        }
+        
+        // Añado el evento click al botón
+        botonSaludar.addEventListener("click", saludarUsuario);
+        
+        // También funciona con Enter en el input
+        inputNombre.addEventListener("keypress", function(evento) {
+            if (evento.key === "Enter") {
+                saludarUsuario();
+            }
+        });
+    </script>
+</body>
+</html>
