@@ -1,13 +1,24 @@
 /**
+ * Tipado para una tarea usada en la aplicación.
+ * @typedef {Object} Tarea
+ * @property {string|number} id - Identificador único de la tarea
+ * @property {string} texto - Texto/descripcion de la tarea
+ * @property {boolean} completada - Indicador si la tarea está completada
+ * @property {string|Date} fechaCreacion - Fecha de creación (ISO string o Date)
+ */
+
+/**
  * Fábrica para crear elementos de UI de tareas.
  * Encapsula la lógica de creación del DOM según el tipo solicitado.
+ * @class ElementoUIFactory
  */
 class ElementoUIFactory {
   /**
-   * Crea un elemento de UI para una tarea según el tipo
-   * @param {Object} tarea - Objeto tarea con propiedades id, texto, completada, fechaCreacion
+  * Crea un elemento de UI para una tarea según el tipo
+  * @param {Tarea} tarea - Objeto tarea con propiedades id, texto, completada, fechaCreacion
    * @param {string} tipo - Tipo de elemento: 'simple' o 'detallado'
    * @returns {HTMLElement} Elemento DOM creado
+  * @throws {Error} Si el tipo no es reconocido
    */
   crearElementoTarea(tarea, tipo) {
     if (tipo === 'simple') {
@@ -20,10 +31,10 @@ class ElementoUIFactory {
   }
 
   /**
-   * Crea un elemento simple tipo lista
-   * @param {Object} tarea
-   * @returns {HTMLLIElement}
-   * @private
+  * Crea un elemento simple tipo lista
+  * @param {Tarea} tarea
+  * @returns {HTMLLIElement}
+  * @private
    */
   crearElementoSimple(tarea) {
     const li = document.createElement('li');
@@ -38,10 +49,10 @@ class ElementoUIFactory {
   }
 
   /**
-   * Crea un elemento detallado con más información
-   * @param {Object} tarea
-   * @returns {HTMLDivElement}
-   * @private
+  * Crea un elemento detallado con más información
+  * @param {Tarea} tarea
+  * @returns {HTMLDivElement}
+  * @private
    */
   crearElementoDetallado(tarea) {
     const div = document.createElement('div');

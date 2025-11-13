@@ -1,10 +1,28 @@
-// app.js - Utiliza la fábrica para crear elementos DOM
 
+/**
+ * Tipado para una tarea usada en la aplicación.
+ * @typedef {Object} Tarea
+ * @property {string|number} id - Identificador único de la tarea
+ * @property {string} texto - Texto/descripcion de la tarea
+ * @property {boolean} completada - Indicador si la tarea está completada
+ * @property {string|Date} fechaCreacion - Fecha de creación (ISO string o Date)
+ */
+
+/**
+ * Gestor (singleton) de tareas obtenido del módulo TaskManager.
+ * @type {any}
+ */
 const gestor = TaskManager.getInstance();
+
+/**
+ * Fábrica para crear elementos de UI de tareas.
+ * @type {ElementoUIFactory}
+ */
 const factory = new ElementoUIFactory();
 
 /**
- * Observador que renderiza la vista simple usando la fábrica
+ * Observador que renderiza la vista simple usando la fábrica.
+ * @returns {void}
  */
 function renderizarVistaSimple() {
   const contenedor = document.getElementById('lista-simple');
@@ -25,7 +43,9 @@ function renderizarVistaSimple() {
 }
 
 /**
- * Observador que renderiza la vista detallada usando la fábrica
+ * Observador que renderiza la vista detallada usando la fábrica.
+ * Añade manejadores de eventos a los elementos creados por la fábrica.
+ * @returns {void}
  */
 function renderizarVistaDetallada() {
   const contenedor = document.getElementById('lista-detallada');
@@ -61,22 +81,36 @@ function renderizarVistaDetallada() {
 gestor.suscribir(renderizarVistaSimple);
 gestor.suscribir(renderizarVistaDetallada);
 
-// Función para agregar tarea
+/**
+ * Añade una nueva tarea usando el texto del input.
+ * @returns {void}
+ */
 function agregarTarea() {
   const input = document.getElementById('input-tarea');
   const texto = input.value.trim();
-  
+
   if (texto) {
+    /**
+     * Llamada al gestor para crear una tarea nueva usando solo el texto.
+     * El gestor se encarga de construir el objeto `Tarea` completo.
+     */
     gestor.agregarTarea(texto);
     input.value = '';
     input.focus();
   }
 }
 
-// Event listener del input
-document.getElementById('input-tarea').addEventListener('keypress', (e) => {
+/**
+ * Manejador de evento para el input de tarea.
+ * @param {KeyboardEvent} e
+ * @returns {void}
+ */
+function manejarKeypressInput(e) {
   if (e.key === 'Enter') agregarTarea();
-});
+}
+
+// Registrar listener del input
+document.getElementById('input-tarea').addEventListener('keypress', manejarKeypressInput);
 
 // Renderizado inicial
 renderizarVistaSimple();
