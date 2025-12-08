@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Evaluación DOM - RA6</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="app.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <h1 id="titulo-principal">Panel de Control DOM</h1>
+        <p class="subtitulo">Ejercicios de manipulación de la web</p>
+    </header>
+
+    <main>
+        <section class="widget">
+            <h2>Ejercicio 2: El Interruptor</h2>
+            <div id="light-bulb" class="luz-apagada">💡</div>
+            <button id="btn-toggle">Encender / Apagar</button>
+        </section>
+
+        <section class="widget" id="profile-card" data-user-id="123">
+            <h2>Ejercicio 3: Perfil de Usuario</h2>
+            <p class="profile-name">Nombre Por Defecto</p>
+            <p class="profile-desc">Descripción genérica del usuario.</p>
+        </section>
+
+        <section class="widget">
+            <h2>Ejercicio 4: Galería de Imágenes</h2>
+            <img id="main-image" src="https://picsum.photos/id/10/400/300" alt="Imagen principal">
+            <div id="gallery-thumbs">
+                <img src="https://picsum.photos/id/20/400/300" alt="Miniatura 1" class="thumb">
+                <img src="https://picsum.photos/id/30/400/300" alt="Miniatura 2" class="thumb">
+                <img src="https://picsum.photos/id/40/400/300" alt="Miniatura 3" class="thumb">
+            </div>
+        </section>
+
+        <section class="widget">
+            <h2>Ejercicio 5: Lista de Tareas</h2>
+            <ul id="task-list">
+                <li>Tarea 1</li>
+                <li>Tarea 2</li>
+            </ul>
+            <input type="text" id="input-new-task" placeholder="Nueva tarea...">
+            <button id="btn-add-task">Añadir Tarea</button>
+        </section>
+
+        <section class="widget">
+            <h2>Ejercicio 6: El Modal</h2>
+            <button id="btn-open-modal">Abrir Modal</button>
+            <div id="modal" class="hidden">
+                <div class="modal-content">
+                    <p>Esto es una ventana modal.</p>
+                    <button id="btn-close-modal">Cerrar</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="widget">
+            <h2>Ejercicio 7: Notificaciones</h2>
+            <div id="status-box">Estado: Pendiente</div>
+        </section>
+
+    </main>
+
+</body>
+
+</html>
